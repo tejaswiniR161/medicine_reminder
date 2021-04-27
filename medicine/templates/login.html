@@ -1,0 +1,82 @@
+{%extends 'base.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%block content1%}
+  <title>LogIn</title>
+  <meta charset="utf-8">
+  <style>
+.space { margin:0; padding:0; height:50px; }    
+</style>
+    <script>
+    $(function(){
+        $("#si").click( function(){
+            var e=$("#e").val();
+            var pwd=$("#pwd").val();
+            //console.log(e);
+            //console.log(pwd);
+            $.ajax({
+                url:"",
+                type:"POST",
+                data:{
+                    'e': e,
+                    'pwd': pwd,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                success:function(d){
+                    var t=d.l;
+                    if(t=="valid")
+                        {
+                            alert("Login successful!")
+                            console.log("success");
+                            location.href="/"
+                            
+                        }
+                    else
+                        {
+                            $("#e").val("");
+                            $("#pwd").val("");
+                            $("body").append('<div class="alert alert-danger">Login Failed ... Try Again</div>');
+                            alert("Login Failed");
+                            console.log("failed");
+                        }
+                },
+                error:function(a,b,c){console.log(a.responseText)},
+                
+            });
+            console.log("clicked");
+        });
+    });
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+<nav class="navbar navbar-inverse">  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#" style="font-size:2em;">Medicine Reminder</a>
+    </div>  
+</nav>
+</div>
+  
+<div class="container">
+    <div class="page-header">
+    <h3>Login to your account</h3>      
+    </div>
+    
+    <input type="email" id="e" name="e" class="form-control col-md-6 input-lg" placeholder="Enter Email Address" required/>
+    <div class="space">
+        </div>
+    
+    <input type="password" id="pwd" name="pwd" class="form-control col-md-6 input-lg" placeholder="Enter Password" required/>
+    <div class="space">
+        </div>
+    <button id="si" class="btn-primary form-control input-lg">Sign In</button>
+    <div class="space">
+        </div>
+    <button class="btn-default form-control input-lg"><a href="/signup">New here? Register</a> </button>
+    <div class="space">
+    </div>
+    </div>
+</body>
+    {%endblock%}
+</html>

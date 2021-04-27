@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%block navb%}
+  <title>Home</title>
+  <meta charset="utf-8">
+  
+</head>
+<body>
+<div class="container-fluid">
+<nav class="navbar navbar-inverse">
+  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/home" style="font-size:2em;">Medicine Reminder</a>
+    </div>
+    <!-- <ul class="nav navbar-nav">
+        <li class=""><a href="#">Hello</a></li>
+        <li class=""><a href="#">whatevr?</a></li>
+    </ul> -->
+    <ul class="nav navbar-nav navbar-right">
+      <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
+      <li style="padding-right:20px;"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  
+</nav>
+    </div>
+    {%block home1%}
+    {%endblock%}
+</body>
+    {%endblock%}
+    
+</html>

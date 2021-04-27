@@ -1,0 +1,58 @@
+{%extends 'base.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%block content1%}
+  <title>Medicine Reminder</title>
+  <meta charset="utf-8">
+  <style>
+.space { margin:0; padding:0; height:50px; }    
+</style>
+</head>
+<body>
+<div class="container-fluid">
+<nav class="navbar navbar-inverse">  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#" style="font-size:2em;">Medicine Reminder</a>
+    </div>  
+</nav>
+</div>
+  
+<div class="container">
+    <div class="page-header">
+    <h3>Create a new account</h3>      
+    </div>
+    <!--<div class="input-group input-group-lg">-->
+    <div class="alert alert-success">Don't worry !! we won't bug you :)</div>
+    
+    <form action="/SignUpSave/" method="post">
+        {%csrf_token%}
+    <input id="fn" name="fn" type="text" class="form-control col-md-6 input-lg" placeholder="Enter First Name" required/>
+    <div class="space">
+        </div>    
+    <input type="text" name="sn" class="form-control col-md-6 input-lg" placeholder="Enter Second Name" required/>
+    <div class="space">
+        </div>    
+    <input type="email" name="e" class="form-control col-md-6 input-lg" placeholder="Enter Email Address" required/>
+    <div class="space">
+        </div>
+    <!--<input type="text" class="form-control col-md-6 input-lg" placeholder="Enter User Name" required/>
+    <div class="space">
+        </div>-->
+    
+    <input type="password" name="pwd" class="form-control col-md-6 input-lg" placeholder="Enter Password" required/>
+    <div class="space">
+        </div>
+    <button type="submit" class="btn-primary form-control input-lg">Sign Up</button>
+    <div class="space">
+        </div>
+        
+    </form>
+    <button class="btn-default form-control input-lg"><a href="/login">Have an account? Login </a></button>
+    </div>
+    
+<!--</div>-->
+
+</body>
+    {%endblock%}
+</html>
