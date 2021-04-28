@@ -19,6 +19,10 @@
     {
         margin-top: 2%;
     }
+    #save
+    {
+        margin-top: 2%;
+    }
 </style>
 <script>
         
@@ -67,6 +71,7 @@ $(function(){
             success:function(d){
                 console.log("done");
                 console.log(d);
+                alert("Saved!");
             },
             error:function(a,b,c){
                 alert("shit... errorrooo... that's too sad.. :'(");
@@ -80,11 +85,11 @@ $(function(){
 <div id="cont" class="container ">
    <div class="col-md-12">
        <div class="alert alert-info alert-dismissable fade in">
-           Input the time slots when you'd like the box to remind!
+           Input the time slots below!
        </div>
        
        <div class="form-control" id="medholder">
-           Add Time
+           Add time in HH:MM format in 24 hours format, Note: time zone - physical location of the medicine box
             <br/>
 
            <input type="number" placeholder="Hours" id="h1"/>
