@@ -10,9 +10,12 @@ from .models import tablet
 # Create your views here.
 
 @login_required(login_url='/login')
-def index(request):
+def index(r):
+    em=r.session['e']
     #return HttpResponse("Hello, world. You're at the polls index.")
-    return render(request,'home.html')
+    u=User.objects.get(username=em)
+    tab=tablet.objects.get(uid=u)
+    return render(r,'home.html',{"tablets":tab.tablet_time})
 
 def logIn(r):
     if r.method=="POST":
@@ -32,6 +35,17 @@ def logIn(r):
 
 def signup(r):
     return render(r,'signup.html')
+
+def savetab(r):
+    em=r.session['e']
+    print(em)
+    u=User.objects.get(username=em)
+    time=r.POST.get("time")
+    attr="tablet_time"
+    tabobj=tablet.objects.get(uid=u)
+    setattr(tabobj,attr,time)
+    tabobj.save()
+    return JsonResponse({'d':'success'})
 
 def SignUpSave(r):
     fn=r.POST.get("fn")

@@ -4,47 +4,109 @@
 </script>
 <style>
     .space { margin:0; padding:0; height:50px; }    
-    
+    #medholder
+    {
+        height:auto;
+    }
+    input
+    {
+        margin-top: 1%;
+        margin-bottom: 1%;
+        margin-left: 2%;
+        margin-right: 1%;
+    }
+    #conv
+    {
+        margin-top: 2%;
+    }
 </style>
 <script>
         
 $(function(){
     console.log("onload???");
-    /* $("#conv").click(function(){
-        var txt1=$('#ptext').val();
-        console.log(txt1);
+    var tablets = "{{tablets}}";
+    console.log("tablets = " + tablets);
+    
+    slots=tablets.split(";");
+    var id=1;
+    slots.forEach(
+        hm => 
+        {
+            console.log(hm);
+            t=hm.split(":");
+            h=t[0];
+            m=t[1];
+            $('#h'+id).val(h);
+            $('#m'+id).val(m);
+            id+=1;
+        }
+    );
+
+
+
+    $("#save").click(function()
+    {
+        var h1=$('#h1').val();
+        var h2=$('#h2').val();
+        var h3=$('#h3').val();
+        var h4=$('#h4').val();
+        var m1=$('#m1').val();
+        var m2=$('#m2').val();
+        var m3=$('#m3').val();
+        var m4=$('#m4').val();
+        console.log(h1);
         $.ajax({
-            url:"/home/Convert/",
+            url:"/savetab/",
             type:"post",
             dataType: 'json',
-            data:{
+            data:
+            {
                 'csrfmiddlewaretoken': '{{ csrf_token }}',
-                'txt':txt1
+                'time':`${h1}:${m1};${h2}:${m2};${h3}:${m3};${h4}:${m4}`
             },
             success:function(d){
                 console.log("done");
-                ho=d;
                 console.log(d);
-                
-                mainconversion(txt1);
             },
             error:function(a,b,c){
                 alert("shit... errorrooo... that's too sad.. :'(");
                 console.log(a.responseText);
             }
         });
-    }); */   
+    });  
 });
 </script>
 
 <div id="cont" class="container ">
    <div class="col-md-12">
        <div class="alert alert-info alert-dismissable fade in">
-           Input plain text below in the box to convert it to your handwriting !
+           Input the time slots when you'd like the box to remind!
        </div>
        
-       <textarea class="form-control" rows="22%" id="ptext"></textarea>
-       <button id="conv" class="form-control btn-info">Convert !</button>
+       <div class="form-control" id="medholder">
+           Add Time
+            <br/>
+
+           <input type="number" placeholder="Hours" id="h1"/>
+           <input type="number" placeholder="Minutes" id="m1"/>
+
+           <br/>
+
+           <input type="number" placeholder="Hours" id="h2"/>
+           <input type="number" placeholder="Minutes" id="m2"/>
+
+           <br/>
+
+           <input type="number" placeholder="Hours" id="h3"/>
+           <input type="number" placeholder="Minutes" id="m3"/>
+
+           <br/>
+
+           <input type="number" placeholder="Hours" id="h4"/>
+           <input type="number" placeholder="Minutes" id="m4"/>
+
+       </div>
+       <button id="save" class="form-control btn-info">Save</button>
    </div>
 </div>
 

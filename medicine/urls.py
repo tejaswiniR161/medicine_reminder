@@ -9,6 +9,7 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     url(r'^SignUpSave/', views.SignUpSave, name="signupsave"),
     path('signup/', views.signup, name='signup'),
+    path("savetab/",views.savetab,name="savetab"),
     path('', views.index, name='index'),
     #url(r'^login/',views.LogIn,name="login"),
     #url(r'^$', views.Home, name="home"),
