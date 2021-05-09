@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import time
 import paho.mqtt.subscribe as subscribe
 import schedule
+import os
 
 def job():
     print("executed?")
@@ -47,11 +48,13 @@ p.start((90 / 18) + 2)
 
 def open_box():
     time.sleep(1)
+    os.system("cvlc ./audio/timeformeds.mp3 --play-and-exit")
     print("opening the box")
     global p
     duty = (270 / 18) + 2
     p.ChangeDutyCycle(duty)
     time.sleep(1)
+
 
 def close_box():
     duty = (90 / 18) + 2
@@ -67,6 +70,8 @@ while True:
     print("waiting?")
     schedule.run_pending()
     if p==0: """
+
+open_box()
 
 subscribe.callback(on_scheduler_request, "medbox/schedule")
 
