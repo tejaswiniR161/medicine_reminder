@@ -45,6 +45,9 @@ def savetab(r):
     tabobj=tablet.objects.get(uid=u)
     setattr(tabobj,attr,time)
     tabobj.save()
+    fo=open("schedule.txt","w")
+    fo.write(time)
+    fo.close()
     return JsonResponse({'d':'success'})
 
 def SignUpSave(r):
