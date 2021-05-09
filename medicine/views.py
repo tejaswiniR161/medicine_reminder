@@ -7,6 +7,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from .models import tablet
+import os
 # Create your views here.
 
 @login_required(login_url='/login')
@@ -48,6 +49,10 @@ def savetab(r):
     fo=open("schedule.txt","w")
     fo.write(time)
     fo.close()
+    os.system("mosquitto_pub -t medbox/schedule -m on")
+    #msg={"topic":"medbox/runscheduler","payload":"save"}
+    #msgs = [{'topic': "paho/test/multiple", 'payload': "multiple 1"}, ("paho/test/multiple", "multiple 2", 0, False)]
+    #publish.single("paho/test/single", "payload", hostname="mqtt.eclipse.org")
     return JsonResponse({'d':'success'})
 
 def SignUpSave(r):

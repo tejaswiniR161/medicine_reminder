@@ -7,12 +7,11 @@ last_state=""
 #fi.close()
 print(last_state)
 
-def lookforchanges(sc): 
+def lookforchanges(sc):
     print("Checking for changes")
     fi = open("schedule.txt","r")
     new_state=fi.read()
     fi.close()
-    print("dhfbd")
     print(new_state)
     global last_state
     if last_state!=new_state:
