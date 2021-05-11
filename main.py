@@ -67,6 +67,7 @@ def open_box():
     if count>=30:
         os.system("cvlc ./audio/alert.mp3 --play-and-exit")
         print("Pill not taken, alerting the caretaker")
+        send_email()
         close_box()
     else:
         print("Thanks for taking the pill")
@@ -75,6 +76,29 @@ def open_box():
         #pill not taken, alerting the people
 
     #if GPIO.input(outhelmetip)==1:
+
+def send_email():
+    from sendgrid import SendGridAPIClient
+    from sendgrid.helpers.mail import Mail
+    f=open("secret.txt","r")
+
+    SENDGRID_API_KEY=f.read()
+    message = Mail(
+        from_email='stockroom.bioc@gmail.com',
+        to_emails='tejr1601@gmail.com',
+        subject='Your ward forgot to take their meds',
+        html_content='<strong>Remind your ward to take their meds!</strong>')
+    try:
+        sg = SendGridAPIClient(SENDGRID_API_KEY)
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+        print("email sent")
+    except Exception as e:
+        print(e.message)
+
+
 def announceAndSnooze(last_time,count=0):
     global stop
     while count<=2:
@@ -96,6 +120,7 @@ def close_box():
     time.sleep(1)
 
 close_box()
+send_email()
 #open_box()
 
 subscribe.callback(on_scheduler_request, "medbox/schedule")
