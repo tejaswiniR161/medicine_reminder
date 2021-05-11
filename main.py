@@ -120,7 +120,7 @@ def close_box():
     time.sleep(1)
 
 close_box()
-send_email()
+#send_email()
 #open_box()
 
 subscribe.callback(on_scheduler_request, "medbox/schedule")
